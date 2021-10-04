@@ -1,0 +1,332 @@
+#import sys
+import datetime
+class Employee:
+    Empr_Name = "ABC India Limited"   #Inside the class but outside the method..
+    #id,name,rph,no_of_hours,salary,status   #class Variable= Empr_Name
+    
+    #obj_count=0
+
+    def __init__(self):
+        a=10
+        #Employee.obj_count += 1  #Compound Assignment
+        print("constructor with no parameter",id(self))
+        print("Inside Python Constructor Method")
+        
+        self.id=1000000
+        #this.id=id1
+        self.name="Demo"
+        self.rph=500
+        self.no_hours=9
+    #any method(i/c/s).. invoked using Objref...self/cls....classname
+    def calc_sal(a):
+        #a=20
+        #print("calc Sal",type(a),id(a))
+        #a.salary =a.rph*a.no_hours*(Employee.daysinmonth()-noofdays)
+        a.salary =a.rph*a.no_hours*a.daysinmonth()
+        #a.salary =a.rph*a.no_hours*31 #1000*9*22
+        #1000*9*30= 270000
+  
+    def display(a):
+        #print("Display",type(a),id(a))  
+        #a.Empr_Name = "Inside method editing this Employer Name"  #Reassigning...
+        
+        print("Employer Name IC using selfObject Name ", a.Empr_Name)
+        print("Employer Name IC Using Class Name ", Employee.Empr_Name)
+        #Employee.Empr_Name = "XYZ india ltd"
+        #print("After By Class Name ", Employee.Empr_Name)
+        #print("After By Object Name ", a.Empr_Name)
+        #print("By Object Name ", a.Empr_Name)
+        #print("By Class Name ", Employee.Empr_Name)        
+        print(a.id)
+        print(a.name)
+        a.calc_sal()  # invokes other member method
+        #a.salary=a.rph*a.no_hours*22
+        print(a.salary)
+        Employee.demo1()
+        #a.Empr_Name = "XYZ India Ltd" #Initialize
+        #print(a.no_hours)
+        #a.calc_sal(a)
+        a.status="Married" # i am initializing Instance V
+        print(a.status)
+        #Employee.demo1()#print(a.abc)  #accessing
+        #print("By Class Name ", Employee.Empr_Name)
+        #print("By Class Name ", Employee.Empr_Name)
+        #Employee.Empr_Name="XYZ Company"
+
+
+    def __init__(a,id1,b,c,d):
+        #a=10
+        #Employee.obj_count += 1  #Compound Assignment
+        print("constructor",id(a))
+        print("Inside Python Constructor Method")
+        a.id=id1
+        #this.id=id1
+        a.name=b
+        a.rph=c   #rate per hour
+        a.no_hours=d
+
+    def delete(cls):
+        #self is used to access(I/A/RA/R) your instance variable
+        print("Before deleting using self :", cls.salary)
+        #del self.salary
+        del Employee
+        
+        #del self
+        #print("After del usng self :", self.salary)
+
+    @classmethod # mandatory
+    def demo1(cls):  # cls - implicit variable has ref of class
+        print("Instance Memory Ref",type(Employee),id(Employee))
+        print("Instance Memory Ref",type(cls),id(cls))
+        print(Employee.Empr_Name)
+        print(cls.Empr_Name)
+        #cls.delete()
+
+        #del Employee
+        #print(cls.salary)  #this is not 
+        print("Inside Class Method")
+        #a = Employee()
+        #a.id
+        #print(a.id)
+    
+    @staticmethod  # this is not mandatory
+    def daysinmonth():  
+        print("Inside Static Method")
+        today = datetime.datetime.now()  #read today's date(DD/MM/YYYY HH:MM:SS millisecs)
+        print(today)
+        month=int(today.strftime("%m"))   #Aug - 08
+        year = int(today.strftime("%Y"))  #2021
+        print(year,month)
+        year=1990
+        normalmonths=[31,28,31,30,31,30,31,31,30,31,30,31]
+        leapmonths=[31,29,31,30,31,30,31,31,30,31,30,31]
+        isleap= (not year%4 and year%100!=1) or not year%400  #year divisble by 4 and century
+        print("Is Leap", isleap)
+        if isleap:
+            print("Leap Year Days",leapmonths[month-1])
+            return leapmonths[month-1]
+        else:
+            print("Leap Year Days",normalmonths[month-1])
+            return normalmonths[month-1]
+
+    def __str__(a):
+        str1="Name: {}, ID: {}, rph: {}, No.Hours: {}".format(a.name,a.id,a.rph,a.no_hours)
+        return str1
+
+"""
+        #within class (also within the method)
+        #within method (always within the class)
+
+        #instance variable/Methods are accessed(init/reassign/read) within the class
+        #using self variable
+        #instance variable are accessed Outside the class using ObjRef variable
+
+        #What, Where and How
+        #**Class variable are initialized within the class but outside the method (only)
+        #**Class variable are reassigned within the class using Class Name (not using self)
+        #**Class variable are used/Read within the class using self/Class Name
+        #**Class variable are not Initialized Outside the class (Global Variable concept)
+        #**Class variable are reassigned Outside the class using Class Name variable(Obj Ref)
+        #**Class variable are Used/read Outside the class using objRef/Class Name variable
+
+
+     
+    
+    
+##########################################################################
+print("Program starts here")
+#Empr_Name="Amazon India LTD"   #GV - initialized outside the class and Function
+#e1 = Employee()
+e1 = Employee(1001,"Janani",1000,9) # Object creation / Instantiation
+e1.display()
+print("Salary Information ", e1.salary)
+#e1.delete()
+#del e1.salary
+#del e1
+print("Salary Information ", e1.salary)  #will it work or Error
+#Employee.demo1() #calling class method
+e1.demo1()
+print(e1.daysinmonth())
+
+
+#Employee.Empr_Name = "Reliance Industries"  #Reassigning...
+#e1.Empr_Name = "Jio India LTD" #Initializing or Reassigning
+#print("After Display OC Employer Name using Class Name", Employee.Empr_Name)
+#print("After Display OC Employer Name using Obj ref e1", e1.Empr_Name)
+
+#e2 = Employee(1002,"Athaulla",800,8)
+#Employee.Empr_Name = "XYZ India Ltd" #ReAssigning
+#e2.display()
+#print("Thru Class Name ", Employee.Empr_Name)
+#print("thru Obj ref e2", e2.Empr_Name)
+#e3=Employee() #ths will work now
+#e3.display()
+#e1 = Employee(1001,"Janani")
+#e1=__init__(1001,"Janani",1000,9)
+#e2 = Employee(1002,"Athaulla",800,8)
+#e1.display()
+#e1.abc="Balaji"  #
+#print("Before deleting usng Obj Ref :", e1.abc)
+#e1.delete()
+#del e1
+#print("After deleting usng Obj Ref :", e1.abc)
+#e1.__init__(1002,"Athaulla",800,8)
+#print("Id of e1 : ",id(e1))
+#print("Id of e1 : ",id(e2))
+#print(e1.id,e1.name)
+#e1.calc_sal()
+#e1.display()
+#e2.display()
+#e1.Empr_Name = "XYZ India Ltd" #initializing 
+#print("Thru Class Name ", Employee.Empr_Name)
+#print("thru Obj ref ", e1.Empr_Name)
+#e1.display()
+
+#print("Static method :", Employee.daysinmonth())
+
+
+print("Outside class Memory Instance ",type(e1),id(e1))
+print("Name attribute outsde class ",e1.name)
+print("Thru Class Name ", Employee.Empr_Name)
+print("thru Obj ref ", e1.Empr_Name)
+e1.Empr_Name="E1 Jio Lall &Co"
+
+
+
+#e2= Employee(1002, 'Athaulla',500,10)
+
+#print("*"*80)
+#e2.display()
+#e2 = Employee(
+#e1.daysinmonth()
+#e1.display()
+
+
+
+
+#print("Thru Class Name ", Employee.Empr_Name)
+#print("thru Obj ref ", e1.Empr_Name)
+#print(e1.__dict__)
+#e1.Empr_Name="E1 Janani &Co"
+#print(e1.__dict__)
+#print("Program Starts here")
+#print("Refernce Id :", id(Employee))
+
+#print("Static method Output : ", Employee.daysinmonth())
+
+
+
+e2=Employee(1002,"Priya", 100,8)
+e3=Employee(1003, 'Athaulla',500,10)
+e4=e2
+print("e1",sys. getrefcount(e1))
+print("e2",sys. getrefcount(e2))
+print("e3",sys. getrefcount(e3))
+print("e4",sys. getrefcount(e4))
+print("Employee",sys. getrefcount(Employee))
+#e1.display()
+Employee.demo1()
+print("Days in month : ", Employee.daysinmonth())
+#Employee.Empr_Name="E1 Janani &Co"
+#e1.Empr_Name="E1 Janani &Co"
+#print("Accessing Outside class using Obj Ref ", e1.Empr_Name)
+#print("Accessing Outside class using Class Name ", Employee.Empr_Name)
+#print("Total nos. objs created is :", Employee.obj_count)
+#print(Employee.__dict__)
+
+#e4=Employee()
+#e4.display()
+#e4.name="Soman" #this shldnot be allowed - Encapsulation - Data Hiding
+#print("*"*80)
+#e4.display()
+#print("*"*80)
+
+#e3.display()
+#print("*"*80)
+
+
+
+
+
+
+
+
+
+#e4=e2  # this is not creating obj....ref assigning only
+
+
+
+
+
+
+
+
+
+
+
+#e5=Employee(1003, 'Athaulla1',500,10)
+#e6=Employee(1003, 'Athaulla2',500,10)
+
+#print("Using Object",type(e1),id(e1))
+#e1.calc_sal()
+#e1.display(1)
+#e1.daysinmonth()
+
+
+
+
+#Employee.demo1()  #invoking the class method using class name
+
+#e=Employee()
+
+e1.Empr_Name = "E1 class name via Obj Ref"
+
+Employee.Empr_Name="E1 Janani &Co"
+print(Employee.Empr_Name)
+print("Name",e1.name, "Roll No", e1.id)
+print(type(e2),id(e2))
+e2.calc_sal(4)
+e2.name="Best friend"
+e2.name1="DEmo Name"
+e2.display(0)
+
+print("Name",e2.name, "Roll No", e2.id)
+print(type(e3),id(e3))
+e3.calc_sal(0)
+e3.display(1)
+print(type(e4),id(e4))
+e4.display(2)
+print("You created %d of subjects of Employee Class" %Employee.obj_count)
+
+
+3 types of Variable.
+1. Local variable - assigned inside method and its local to that method.
+2. Instance / Object Variable (value will vary from Obj to obj or 
+3. Class/ Static variable
+
+4. Global varible (Independent OOP)        
+
+3 Types of Methods
+1. instance/Object method (a)
+2. Class Method (wont have a) - Equivalent to Java's Static method.
+3. Static Method(wont have a) - 
+4. Constructor (a)
+          
+
+Empr_Name = "ABC India Limited"
+    obj_count=0
+    
+    @classmethod # mandatory
+    def demo1(cls):
+        print(Employee.Empr_Name)
+        print(cls.Empr_Name)
+        print("Inside Class Method")
+        #print(a.id)
+        
+    @staticmethod  # this is not mandatory
+    def daysinmonth():
+        print("Inside Static Method")
+        return 20
+                               
+"""       
+    

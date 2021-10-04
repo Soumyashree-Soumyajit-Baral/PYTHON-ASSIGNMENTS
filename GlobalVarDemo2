@@ -1,0 +1,137 @@
+#local variable, instance, class/static variable, 4th(GV)
+#module can have variable, functions and class
+
+#Global Variable
+#Variables that are created outside of a function/class are known as global variables.
+
+#Global variables can be used/accessed both inside and outside of functions/class
+
+
+#global - initialized outside the function or class....
+#Local variable - initialized inside the function/method (arg/parameter,initialize)
+#Instance variable - initialized inside method(Constructor or instance)-self.id
+#class/Static variable - initialized inside class but outside the method
+#1 Create a variable outside of a function, and use it inside the function
+
+"""
+x = "Python"
+
+y="Developer"
+
+def display():
+  #global x
+  x = "Java"     #Local Variable......Its not possible to update GV directly  
+  print("B global x value inside the function",globals()['x'])
+  print("B Inside the function ",x)
+  globals()['x']="Julia"
+  print("A global x value inside the function",globals()['x'])
+  print("A Inside the function ",x)
+  #x="Python"   #global variable........
+  #print("Inside the function ",x)
+
+  #what if i want to have both local and global var same name.
+  #at the same time, i want to update global var inside f or M
+
+class A:
+  def show(self):
+    print("Inside the class and show method ",x)
+
+
+a1=A()
+a1.show() #x=Python 
+display() #x=Java
+
+print("Outside the function ",x)  #Java
+
+
+"""
+
+def myfunc():
+  global x
+  x = "Julia"  #local variable assigning
+  global y
+  y="Java global"  #local
+  print("Inside function - My fav prog lang is " + y + " "+x)
+  #y="excellent"   #y as global , we can't have y as local variable...
+def func2():
+  #global y
+  #y="No. 1 "  #global or local.......
+  #print("1st time Inside func2 - My fav prog lang is " + y + " "+x)
+  #y="Java"  #global .......
+  print("2nd time Inside func2 - My fav prog lang is " + y + " "+x)
+class Employee():
+  def show(self,y):
+    #global x
+    #global y
+    #x="Golang" 
+    print("Global variable : ", x, y)
+
+func2()  
+myfunc()
+e=Employee()
+e.show(10)
+
+
+#print("outside function - My fav prog lang is " + y + " "+x)  
+
+
+
+
+#result Python is awesome
+
+#2 If you create a variable with the same name inside a function,
+#this variable will be local, and can only be used inside the function.
+#The global variable with the same name will remain as it was,
+#global and with the original value.
+"""
+x = "awesome"
+
+def myfunc(a,b):
+  x = "fantastic"
+  print("Python is " + x)
+
+myfunc()
+
+print("Python is " + x)
+
+#Python is fantastic
+#Python is awesome
+
+
+#3 To create a global variable inside a function,use the global keyword.
+
+def myfunc():
+  global x
+  x = "fantastic"
+
+myfunc()
+
+print("Python is " + x)
+
+#Python is fantastic
+
+#4 Use the global keyword,to change a global variable inside a function.
+x = "awesome"
+
+def myfunc():
+  global x
+  x = "fantastic"
+
+myfunc()
+
+print("Python is " + x)
+#Python is fantastic
+
+
+x = "awesome"
+
+def myfunc():
+  global y
+  y = "fantastic"
+  x ="Local variable"
+  print("Python is " + x + " "+y ,id(x)  , id(y))
+
+myfunc()
+print("Python is " + x + " "+y, id(x), id(y))
+
+"""

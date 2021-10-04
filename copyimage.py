@@ -1,0 +1,7 @@
+f1=open('C:\\Pictures\\IMG_SOUMYA.jpg','rb')
+f2=open('E:\\img_soumya.jpg','wb')
+b1=f1.read()
+print(type(b1))
+f2.write(b1)
+f1.close()
+f2.close()
